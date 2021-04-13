@@ -11,10 +11,10 @@ shhh(library(VIM))
 src_data_file <- '../data/2011-15/data.csv'
 src_dict_file <- '../data/2011-15/dictionary.csv'
 
-variables <- c('OUT', 'AGE', 'SCNS', 'BLDING', 'CRE', 'Na')
+variables <- c('OUT', 'AGE', 'SCNS', 'BLDING', 'K')
 yvar <- 'OUT'
-model_string <- 'OUT~AGE+SCNS+BLDING+CRE+Na'
-model_name <- 'electrolyte-imbalance-cre+na' 
+model_string <- 'OUT~AGE+SCNS+BLDING+K'
+model_name <- 'electrolyte-imbalance-k' 
 model_folder <- paste0('models/', model_name)
 
 # Number of Multiple imputations
@@ -37,7 +37,7 @@ for (iter in 1:num_imp) {
 }
 
 imp_models <- with(imp_data, glm(family="binomial", 
-                                 formula=OUT~AGE+SCNS+BLDING+CRE+Na))
+                                 formula=OUT~AGE+SCNS+BLDING+K))
 
 poolmod <- pool(imp_models)
 print(summary(poolmod))
